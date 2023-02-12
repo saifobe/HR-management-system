@@ -67,13 +67,7 @@ employeeInfo.prototype.calculateNetSalary = function(){
     let rana = new employeeInfo(1005,"Rana Saleh","Administration","Junior");
     let hadi = new employeeInfo(1006,"Hadi Ahmad","Finance","Mid-Senior");
 
-    console.log(ghazi);
-    console.log(lana);
-    console.log(tamara);
-    console.log(safi);
-    console.log(omar);
-    console.log(rana);
-    console.log(hadi);
+    
 
 ghazi.render();
 lana.render();
