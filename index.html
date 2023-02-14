@@ -7,6 +7,7 @@
     <script src="https://kit.fontawesome.com/4f7fe5e387.js" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/64d58efc2.js" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/8e9e5f6276.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
     <title>LAP 7</title>
 </head>
 <body>
@@ -19,7 +20,54 @@
         </ul>
     </header>
     <main> 
-        <script src="constructor.js"></script>
+        <h2> Employee Information</h2>
+        <form id="employeeForm">
+            
+            <fieldset>
+                <legend>Enter Employee Information</legend>
+                
+                <div>
+
+                <label for="name">Full Name:</label>
+                <input type="text" name="name" id="name" placeholder="Name">
+
+                <br/>
+                <br/>
+
+                <label for="department">Department:</label>
+                <select name="depart" id="depart">
+                    <option value="administration">Administration</option>
+                    <option value="marketing">Marketing</option>
+                    <option value="development">Development</option>
+                    <option value="finance">Finance</option>
+                  </select>
+                <br/>
+                <br/>
+
+                <label for="level">Level:</label>
+                <select name="lev" id="lev">
+                    <option value="junior">Junior</option>
+                    <option value="mid-Senior">Mid-Senior</option>
+                    <option value="senior">Senior</option>
+                </select>
+                <br/>
+                <br/>
+
+                <label for="imgUrl">Image</label>
+                <input type="text" name="imgUrl" id="imgUrl" placeholder="image path">
+
+                <br/>
+                <br/>
+                <div class="inputs">
+                <input class="btn" type="submit" value="Add">
+                <input class="btn" type="reset" value="Reset">
+                </div>
+             </div>
+
+            </fieldset>
+
+        </form>
+        <section id="myEmployee" class="myEmployee"></section>
     </main>
     <footer>
         <div class="copyRight"><p>All Right Reserved </p>&copy; </div>
@@ -30,6 +78,6 @@
         </div>
     
     </footer>
-    
+    <script src="constructor.js"></script>
 </body>
 </html>
