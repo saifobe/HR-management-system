@@ -1,4 +1,5 @@
 "use strict";
+let myEmployeeArr = [];
 
 function myImage(){
     const image = new Image(200, 200);
@@ -23,39 +24,46 @@ function fourDigitUniqueNumber(){
 }
 
 
-function employeeInfo(fullName,department,level,image) {
+function employeeInfo(fullName,department,level,image,salary) {
     this.employeeID = fourDigitUniqueNumber();
     this.fullName = fullName;
     this.department = department;
     this.level = level;
     this.image = image;
-    this.salary = this.calculateSalary();
+    this.salary = salary || this.calculateSalary();
+    myEmployeeArr.push(this);
 }
 
 employeeInfo.prototype.calculateSalary = function(){
+    console.log(this.level);
     switch(this.level){
-        case "Junior" :
+        case "junior" :
             this.salary = getRandomArbitrary(500,1000);
             return this.salary
             break;
             
-        case "Mid-Senior" :
+        case "mid-senior" :
             this.salary = getRandomArbitrary(1000,1500);
             return this.salary
             break;
 
-        case "Senior" :
+        case "senior" :
             this.salary = getRandomArbitrary(1500,2000);
             return this.salary
             break;
     }
 }
 
-employeeInfo.prototype.render = function(){
+function render(){
 
     const container = document.getElementById('myEmployee');
     console.log(container);
+    container.innerHTML = '';
 
+    getEmployee();
+    
+
+for(let i=0;i<myEmployeeArr.length;i++){
 
     const newDiv = document.createElement('div');
     container.appendChild(newDiv);
@@ -64,7 +72,7 @@ employeeInfo.prototype.render = function(){
 
     const imgEl = document.createElement('img');
     newDiv.appendChild(imgEl);
-    imgEl.setAttribute('src',this.image);
+    imgEl.setAttribute('src',myEmployeeArr[i].image);
     /*imgEl.width = "200";
     imgEl.height = "200";*/
 
@@ -72,23 +80,27 @@ employeeInfo.prototype.render = function(){
 
     const empName = document.createElement('h4');
     newDiv.appendChild(empName);
-    empName.textContent = `Name: ${this.fullName} `;
+    empName.textContent = `Name: ${myEmployeeArr[i].fullName} `;
 
     const empID = document.createElement('h4');
     newDiv.appendChild(empID);
-    empID.textContent = `ID: ${this.employeeID}`;
+    empID.textContent = `ID: ${myEmployeeArr[i].employeeID}`;
 
     const empDepartment = document.createElement('h4');
     newDiv.appendChild(empDepartment);
-    empDepartment.textContent = `Department: ${this.department} `;
+    empDepartment.textContent = `Department: ${myEmployeeArr[i].department} `;
 
     const empLevel = document.createElement('h4');
     newDiv.appendChild(empLevel);
-    empLevel.textContent = `Level: ${this.level}`;
+    empLevel.textContent = `Level: ${myEmployeeArr[i].level}`;
+
+    const empSalary = document.createElement('h4');
+    newDiv.appendChild(empSalary);
+    empSalary.textContent = `Salary: ${myEmployeeArr[i].salary}`;
 
     //const hrEl = document.createElement('hr');
     //newDiv.appendChild(hrEl);
-
+}
 
 }
 
@@ -140,6 +152,24 @@ function addNewEmployee(event){
     let employeeLevel = event.target.lev.value;
 
     let info = new employeeInfo(employeeFullName,employeeDep ,employeeLevel,imgPath);
-    info.render();
-}
+    //info.render();
+
+    let jsonArr = JSON.stringify(myEmployeeArr);
+    localStorage.setItem("allEmployees", jsonArr);
     
+    render();
+}
+
+function getEmployee(){
+    let jsonArr = localStorage.getItem("allEmployees");
+    myEmployeeArr = JSON.parse(jsonArr);
+    
+    if(myEmployeeArr == null) //localstorage is empty
+    {
+        myEmployeeArr = [];
+    }
+    
+}
+
+getEmployee();
+render();
